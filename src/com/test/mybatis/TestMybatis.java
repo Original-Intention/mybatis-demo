@@ -14,7 +14,7 @@ public class TestMybatis {
 	
 	@Test
 	public void findUserById() throws Exception {
-		
+		//测试查找用户（id）
 		SqlSession sqlSession=factory.openSession();        
         UserMapper usermapper = sqlSession.getMapper(UserMapper.class);
         User user = usermapper.findUserById(1);
@@ -24,7 +24,7 @@ public class TestMybatis {
 	
 	@Test
 	public void findUserByName() throws Exception {
-		
+		//测试查找用户（username）
         SqlSession sqlSession=factory.openSession(); 
         UserMapper usermapper = sqlSession.getMapper(UserMapper.class);
         List<User> users = usermapper.findUserByName("京东快递员");
@@ -36,8 +36,19 @@ public class TestMybatis {
 	}
 	
 	@Test
+	public void findUserDetailById() throws Exception {
+		//测试查找用户（一对一关联查询）
+        SqlSession sqlSession=factory.openSession(); 
+        UserMapper usermapper = sqlSession.getMapper(UserMapper.class);
+        User user = usermapper.findUserDetailById(85);
+        //打印user
+        System.out.println(user);
+        sqlSession.close();
+	}
+	
+	@Test
 	public void addUser() throws Exception {
-
+		//测试添加用户
         SqlSession sqlSession=factory.openSession(); 
         UserMapper usermapper = sqlSession.getMapper(UserMapper.class);
         User user = new User();
@@ -59,7 +70,7 @@ public class TestMybatis {
 	
 	@Test
 	public void addUsers() throws Exception {
-
+		//	测试批量添加用户
         SqlSession sqlSession=factory.openSession(); 
         UserMapper usermapper = sqlSession.getMapper(UserMapper.class);
         List<User> list = new ArrayList<User>();
@@ -88,7 +99,7 @@ public class TestMybatis {
 	
 	@Test
 	public void deleteUser() throws Exception {
-
+		//测试删除用户
         SqlSession sqlSession=factory.openSession(); 
         UserMapper usermapper = sqlSession.getMapper(UserMapper.class);
         usermapper.deleteUserById(88);
@@ -101,7 +112,7 @@ public class TestMybatis {
 	
 	@Test
 	public void updateUser() throws Exception {
-
+		//测试更新用户
         SqlSession sqlSession=factory.openSession(); 
         UserMapper usermapper = sqlSession.getMapper(UserMapper.class);
        
@@ -120,6 +131,7 @@ public class TestMybatis {
 	
 	@Test
 	public void testCache1() throws Exception {
+		//测试一级缓存
 		SqlSession sqlSession=factory.openSession(); 
         UserMapper usermapper = sqlSession.getMapper(UserMapper.class);
         User user1 = usermapper.findUserById(85);        
@@ -133,9 +145,9 @@ public class TestMybatis {
 	
 	@Test
 	public void testCache2() throws Exception {
+		//测试二级缓存
 		SqlSession sqlSession1=factory.openSession();
 		SqlSession sqlSession2=factory.openSession();
-		SqlSession sqlSession3=factory.openSession();
         UserMapper usermapper1 = sqlSession1.getMapper(UserMapper.class);
         User user1 = usermapper1.findUserById(85);
         System.out.println(user1);

@@ -15,6 +15,15 @@ public class User implements Serializable {
 	private Date birthday;// ÉúÈÕ
 	private String address;// µØÖ·
 	private String custom_id;// custom_id
+	private Custom custom;
+
+	public Custom getCustom() {
+		return custom;
+	}
+
+	public void setCustom(Custom custom) {
+		this.custom = custom;
+	}
 
 	public Integer getId() {
 		return id;
@@ -66,6 +75,6 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", sex=" + sex + ", birthday=" + birthday + ", address="
-				+ address + "]";
+				+ address + ",custom="+custom.getCustomName()+"]";
 	}
 }

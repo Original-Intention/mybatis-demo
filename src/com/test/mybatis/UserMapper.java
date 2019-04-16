@@ -8,6 +8,8 @@ public interface UserMapper {
 	
 	public List<User> findUserByName (String username) throws Exception;
 	
+	public User findUserDetailById(int id);
+	
 	public void addUser(User user) throws Exception;
 	
 	/**
@@ -20,4 +22,5 @@ public interface UserMapper {
 	public void deleteUserById(int id) throws Exception;
 	
 	public void updateUser(User user) throws Exception;
+
 }

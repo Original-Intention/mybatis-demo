@@ -6,6 +6,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- namespace：命名空间，和Mapper接口的位置一样，这样框架会自动帮我们找到接口 --> 
 <mapper namespace="com.test.mybatis.UserMapper">
 	
+	<resultMap type="User" id="UserDetail">
+		<id  column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="sex" property="sex"/>
+		<result column="birthday" property="birthday"/>
+		<result column="address" property="address"/>
+		<result column="custom_id" property="custom_id"/>
+		<association property="custom" javaType="Custom">
+			<id column="custom_id" property="customId"/>
+			<result column="custom_name" property="customName"/>
+			<result column="full_name" property="fullName"/>
+			<result column="address" property="address"/>
+			<result column="fax" property="fax"/>
+			<result column="email" property="email"/>
+			<result column="owner_name" property="ownerName"/>
+			<result column="owner_tel" property="ownerTel"/>
+			<result column="status" property="status"/>
+			<result column="note" property="note"/>
+		</association>
+	</resultMap>
 	<cache></cache>
 	
     <select id="findUserById" parameterType="int" resultType="User">
@@ -14,6 +34,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="findUserByName" parameterType="String" resultType="User">
         select * from user where username like '%${value}%'
+    </select>
+    
+    <select id="findUserDetailById" parameterType="int" resultMap="UserDetail">
+        select * from user,custom where user.custom_id=custom.custom_id and user.id=#{id}
     </select>
     
     <!-- 如果你的数据库支持自动生成主键的字段（比如 MySQL 和 SQL Server），
