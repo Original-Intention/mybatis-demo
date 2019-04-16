@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<!-- namespace：命名空间，和Mapper接口的位置一样，这样框架会自动帮我们找到接口 --> 
+<mapper namespace="com.test.mybatis.UserMapper">
+	
+	<cache></cache>
+	
+    <select id="findUserById" parameterType="int" resultType="User">
+        select * from user where id =#{id}
+    </select>
+    
+    <select id="findUserByName" parameterType="String" resultType="User">
+        select * from user where username like '%${value}%'
+    </select>
+    
+    <!-- 如果你的数据库支持自动生成主键的字段（比如 MySQL 和 SQL Server），
+    	那么你可以设置 useGeneratedKeys=”true”，然后再把 keyProperty 设置到目标属性上就 OK 了 -->
+    <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+    	insert into user(username,birthday,sex,address,custom_id) 
+    		values (#{username},#{birthday},#{sex},#{address},#{custom_id})
+    </insert>
+    
+    <!-- 批量添加  -->    
+    <insert id="addUsers" parameterType="User">
+    	insert into user(username,birthday,sex,address,custom_id) values 
+    	<foreach item="item" collection="list" separator="," >
+    	    	(#{item.username},#{item.birthday},#{item.sex},#{item.address},#{item.custom_id})
+    	</foreach>
+    </insert>
+    
+    <update id="updateUser" parameterType="User">
+    	update user set username=#{username},address=#{address},custom_id=#{custom_id} 
+    		where id=#{id}
+    </update>
+    
+    <delete id="deleteUserById" parameterType="int">
+    	delete from user where id=#{id}
+    </delete>
+</mapper>
