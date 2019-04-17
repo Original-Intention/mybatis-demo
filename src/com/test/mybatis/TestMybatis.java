@@ -8,6 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.Test;
 
+import com.test.mybatis.dao.OrdersMapper;
+import com.test.mybatis.javabean.Orders;
+
 public class TestMybatis {
 	
 	public static SqlSessionFactory factory = ConfigTools.getSqlSessionFactory();
@@ -43,6 +46,19 @@ public class TestMybatis {
         User user = usermapper.findUserDetailById(85);
         //打印user
         System.out.println(user);
+        sqlSession.close();
+	}	
+	
+	@Test
+	public void findUserOrderDetailById() throws Exception {
+		//测试查找用户（一对多关联查询、多对多查询）
+        SqlSession sqlSession=factory.openSession(); 
+        OrdersMapper ordersMapper = sqlSession.getMapper(OrdersMapper.class);
+        List<Orders> orders = ordersMapper.findOrderUserDetailById(3);
+        //循环打印user
+        for(Orders order : orders) {
+        	System.out.println(order);
+        }
         sqlSession.close();
 	}
 	

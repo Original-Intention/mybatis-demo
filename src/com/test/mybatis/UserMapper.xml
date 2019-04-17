@@ -25,7 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="status" property="status"/>
 			<result column="note" property="note"/>
 		</association>
-	</resultMap>
+	</resultMap>	
+	
 	<cache></cache>
 	
     <select id="findUserById" parameterType="int" resultType="User">
@@ -36,6 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select * from user where username like '%${value}%'
     </select>
     
+    <!--  测试一对一查询 -->
     <select id="findUserDetailById" parameterType="int" resultMap="UserDetail">
         select * from user,custom where user.custom_id=custom.custom_id and user.id=#{id}
     </select>

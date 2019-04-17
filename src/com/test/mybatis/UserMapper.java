@@ -10,6 +10,8 @@ public interface UserMapper {
 	
 	public User findUserDetailById(int id);
 	
+	public List<User> findUserOrderDetailById(int id);
+	
 	public void addUser(User user) throws Exception;
 	
 	/**

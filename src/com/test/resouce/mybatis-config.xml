@@ -25,5 +25,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</environments>
 	<mappers>
 		<mapper resource="com/test/mybatis/UserMapper.xml" />
+		<mapper resource="com/test/mybatis/mapper/OrdersMapper.xml" />
 	</mappers>
 </configuration>

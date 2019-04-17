@@ -2,6 +2,9 @@ package com.test.mybatis;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import com.test.mybatis.javabean.Orders;
 
 public class User implements Serializable {
 
@@ -16,6 +19,15 @@ public class User implements Serializable {
 	private String address;// µØÖ·
 	private String custom_id;// custom_id
 	private Custom custom;
+	private List<Orders> orders;
+
+	public List<Orders> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Orders> orders) {
+		this.orders = orders;
+	}
 
 	public Custom getCustom() {
 		return custom;
