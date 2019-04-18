@@ -7,6 +7,8 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.test.mybatis.dao.OrdersMapper;
 import com.test.mybatis.javabean.Orders;
@@ -14,6 +16,7 @@ import com.test.mybatis.javabean.Orders;
 public class TestMybatis {
 	
 	public static SqlSessionFactory factory = ConfigTools.getSqlSessionFactory();
+	public static ApplicationContext context = ConfigTools.getApplicationContext();
 	
 	@Test
 	public void findUserById() throws Exception {
@@ -23,6 +26,14 @@ public class TestMybatis {
         User user = usermapper.findUserById(1);
         System.out.println(user);
         sqlSession.close();        
+	}
+	
+	
+	@Test
+	public void springFindUserById() throws Exception {             
+        UserMapper usermapper = context.getBean(UserMapper.class);
+        User user = usermapper.findUserById(1);
+        System.out.println(user);      
 	}
 	
 	@Test

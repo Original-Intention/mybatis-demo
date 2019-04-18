@@ -6,6 +6,8 @@ import java.io.InputStream;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ConfigTools {
 
@@ -22,4 +24,12 @@ public class ConfigTools {
         SqlSessionFactory factory=builder.build(in);
 		return factory;		
 	}
+	
+	public static ApplicationContext getApplicationContext(){
+		//≤‚ ‘≤È’“”√ªß£®id£©		
+		ApplicationContext context = new ClassPathXmlApplicationContext("com/test/resouce/spring-mybatis.xml");
+		return context;		
+	}
+	
+	
 }
